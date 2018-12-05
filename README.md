@@ -6,9 +6,9 @@ to create kafka and websocket weather station app.
 ![Sample of demo](img/kafka-demo-main.png?raw=true)
 
 
-This demo application is driven by the newly added jBPM Kafka Workitem which is able to push messages
+This demo application is driven by the newly added [jBPM Kafka Workitem](https://github.com/kiegroup/jbpm-work-items/tree/master/kafka-workitem) which is able to push messages
 onto a running Kafka server topic. Once user enters in the city and country names, the apps
-business process retrieves the current weather information (using the jBPM OpenWeatherMap workitem)
+business process retrieves the current weather information (using the [jBPM OpenWeatherMap Workitem](https://github.com/kiegroup/jbpm-work-items/tree/master/openweathermap-workitem)
 and then passes it to the Kafka workitem which produces the message onto a configurable topic. 
 The application has a Kafka consumer implementation which listens to messages on the same topic,
 receives the weather info and posts it to a websocket destination. This is then 
@@ -32,7 +32,9 @@ chmod 755 launch.sh (only needed for unix environments , use launch.bat for wind
 ```
 
 3. Download and set up Apache Kafka:
-For quick and easy setup follow instructions on https://kafka.apache.org/quickstart.
+To download Apache Kafka follow instructions here: https://kafka.apache.org/downloads.
+
+Once downloaded you can look at instructions on https://kafka.apache.org/quickstart.
 (all commands below are executed from Kafka installation folder)
 
 a) Start ZooKeeper server:
