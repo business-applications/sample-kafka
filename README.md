@@ -33,6 +33,7 @@ chmod 755 launch.sh (only needed for unix environments , use launch.bat for wind
 
 3. Download and set up Apache Kafka:
 For quick and easy setup follow instructions on https://kafka.apache.org/quickstart.
+(all commands below are executed from Kafka installation folder)
 
 a) Start ZooKeeper server:
 ```
@@ -77,7 +78,7 @@ In your business app service module run:
 5. Access your business application by going to localhost:8090
 
 Your demo app is a consumer of Kafka messages posted on the livewxdata topic. 
-You can also add more consumers, for example commandline in your kafka download directory run:
+You can also add more consumers, for example commandline in your kafka installation folder run:
 ```
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic livewxdata --from-beginning
 ```
