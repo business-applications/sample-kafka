@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jbpm.apps</groupId>
+  <artifactId>sample-kafka</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Sample - Kafka</name>
+
+  <modules>
+    <module>sample-kafka-model</module>
+    <module>sample-kafka-kjar</module>
+    <module>sample-kafka-service</module>
+  </modules>
+</project>
+

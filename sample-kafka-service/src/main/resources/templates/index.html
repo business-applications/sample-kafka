@@ -1,0 +1,126 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <title>jBPM Business Application Demo - Kafka</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/sockjs.min.js"></script>
+    <script src="js/stomp.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+</head>
+
+<body>
+
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>jBPM Business Apps - Kafka + Websockets example</h1>
+
+        <form class="form-horizontal" id="wx-form">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">City</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="cityinput"/>
+                </div>
+            </div>
+
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Country</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="countryinput"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <button type="submit" id="bth-wx"
+                            class="btn btn-primary btn-lg">Show Current Temp
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
+        <div id="container" style="width: 75%;">
+            <canvas id="tempChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+
+    var config = {
+        type: 'bar',
+        data: {
+            "labels": ["Current", "Max", "Min"],
+            "datasets": [{
+                "label": "Current Temp for (Celsius)",
+                "data": [0, 0, 0],
+                "fill": false,
+                "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)"],
+                "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)"],
+                "borderWidth": 1
+            }]
+        },
+        options: {"scales": {"yAxes": [{"ticks": {"beginAtZero": true}}]}}
+    };
+
+    $(document).ready(function () {
+
+        var ctx = document.getElementById('tempChart').getContext('2d');
+        window.myWxBar = new Chart(ctx, config);
+
+        var socket = new SockJS('/live-wxdata');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            stompClient.subscribe('/topic/wxdata', function (wxdata) {
+                $('#wxd').text(wxdata.body);
+
+                var newTempArr = wxdata.body.split(',');
+
+                config.data.datasets[0].data = newTempArr;
+                config.data.datasets[0].label = "Current temp for " + $("#cityinput").val() + " (Celsius)";
+                window.myWxBar.update();
+            });
+        });
+
+        $("#wx-form").submit(function (event) {
+            event.preventDefault();
+
+            var wxForm = {};
+            wxForm["cityinput"] = $("#cityinput").val();
+            wxForm["countryinput"] = $("#countryinput").val();
+
+            $("#bth-wx").prop("disabled", true);
+
+            $.ajax({
+                type: "GET",
+                contentType: "text/plain",
+                url: "/weather/" + wxForm["cityinput"] + "/" + wxForm["countryinput"],
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    $("#bth-wx").prop("disabled", false);
+                },
+                error: function (e) {
+                    $("#bth-wx").prop("disabled", false);
+
+                }
+            });
+
+        });
+
+    });
+</script>
+</body>
+
+</html>

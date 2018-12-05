@@ -1,0 +1,53 @@
+[
+
+        [
+                    "name" : "CurrentWeather",
+                    "displayName" : "CurrentWeather",
+                    "category" : "",
+                    "description" : "",
+                    "defaultHandler" : "mvel: new org.jbpm.process.workitem.owm.CurrentWeatherWorkitemHandler()",
+                    "documentation" : "openweathermap-workitem/index.html",
+
+                    "parameters" : [
+                                        "CityName" : new StringDataType()
+                        ,"CountryCode" : new StringDataType()
+
+                    ],
+                    "results" : [
+                                        "CurrentWeatherData" : new StringDataType()
+
+                    ],
+                    "mavenDependencies" : [
+                                         "org.jbpm.contrib:openweathermap-workitem:7.16.0-SNAPSHOT"
+
+                    ],
+                    "icon" : ""
+
+                ],
+    [
+                "name" : "KafkaPublishMessages",
+                "displayName" : "KafkaPublishMessages",
+                "category" : "",
+                "description" : "",
+                "defaultHandler" : "mvel: new org.jbpm.process.workitem.kafka.KafkaWorkItemHandler()",
+                "documentation" : "kafka-workitem/index.html",
+
+                "parameters" : [
+                                    "Value" : new StringDataType()
+                    ,"Topic" : new StringDataType()
+                    ,"Key" : new StringDataType()
+
+                ],
+                "results" : [
+                                    "Result" : new StringDataType()
+
+                ],
+                "mavenDependencies" : [
+                                     "org.jbpm.contrib:kafka-workitem:7.16.0-SNAPSHOT"
+
+                ],
+                "icon" : ""
+
+            ]
+
+]
