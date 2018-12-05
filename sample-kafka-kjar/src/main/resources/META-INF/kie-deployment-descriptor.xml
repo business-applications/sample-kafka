@@ -18,7 +18,7 @@
     </work-item-handler>
     <work-item-handler>
       <resolver>mvel</resolver>
-      <identifier>new org.jbpm.process.workitem.owm.CurrentWeatherWorkitemHandler("cd3f8c99f0e71941f15e032a1dd2d8b7")</identifier>
+      <identifier>new org.jbpm.process.workitem.owm.CurrentWeatherWorkitemHandler("YOUR_API_KEY_HERE")</identifier>
       <parameters/>
       <name>CurrentWeather</name>
     </work-item-handler>
