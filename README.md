@@ -33,7 +33,8 @@ chmod 755 launch.sh (only needed for unix environments , use launch.bat for wind
 
 3. Download and set up Apache Kafka:
 For quick and easy setup follow instructions on https://kafka.apache.org/quickstart.
-a) Start the ZooKeeper server:
+
+a) Start ZooKeeper server:
 ```
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
