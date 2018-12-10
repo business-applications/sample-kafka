@@ -25,9 +25,9 @@ mvn clean install
 2. Clone this repository locally:
 
 ```
-git clone https://github.com/business-applications/sample-websocket-terminal.git
-cd sample-websocket-terminal
-cd sample-websocket-terminal-service
+git clone https://github.com/business-applications/sample-kafka.git
+cd sample-kafka
+cd sample-kafka-service
 chmod 755 launch.sh (only needed for unix environments , use launch.bat for windows)
 ```
 
